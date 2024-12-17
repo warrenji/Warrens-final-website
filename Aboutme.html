@@ -1,0 +1,184 @@
+<!-- 
+ Warren Ingersoll
+ Section 001
+ 12-18-2024 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About me</title>
+    <link rel="stylesheet" href="../css/styles 2.css">
+</head>
+<body>
+    <a href="../Index.html" id="top">Home</a> |
+    <a href="Resume.html">Resume</a> |
+    <a href="#">About Me</a><br><br>   
+ 
+    <h4>About Me Warren Ingersoll</h4>
+
+    <p class="box1">I am a student at Brigham young University studying accounting.<br>
+    In my freetime I enjoy surfing, going to the beach, and spending <br>
+    time with friends and family. You can also find me playing tennis <br>
+    or on the golf course trying to prefect my swing.
+    </p>
+    <ol>
+        <li>Hobbies
+            <ul>
+                <li>Surfing</li>
+                <li>Golfing</li>
+                <li>Tennis</li>
+                <li>Riding Motorcycles</li>
+            </ul>
+        </li> <br>
+        <li>Favorite Places I've Surfed
+            <ul>
+                <li>Hawaii</li>
+                <li>The Surf Ranch</li>
+                <li>Mexico</li>
+            </ul>
+        </li>
+    </ol>
+    <h4>Photos of Me</h4>
+    <img src="../Images/Me Surfing.jpeg" height="180" alt="Me Surfing" class="photoborder"> 
+    <img src="../Images/At the beach.jpeg" height="300" alt="At the beach" class="photoborder"> <br>
+
+    <h4>Cool Surf Video</h4> 
+    <iframe width="550" height="250" 
+    src="https://www.youtube.com/embed/2EE7-JhzcD4" 
+    class="videoborder"
+    title="YouTube video player" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+</iframe> <br>
+<h4>Surf Spot Tableau Visualization</h4>
+<!-- Tableau Visualization Embed -->
+<div class="tableauPlaceholder" id="viz1733956172342" style="position: relative;">
+    <noscript>
+        <a href="#">
+            <img 
+                alt="Dashboard 1" 
+                src="https://public.tableau.com/static/images/Su/SurfDestinations/Dashboard1/1_rss.png" 
+                style="border: none;" 
+            />
+        </a>
+    </noscript>
+    <object class="tableauViz" style="display: none;">
+        <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
+        <param name="embed_code_version" value="3" />
+        <param name="site_root" value="" />
+        <param name="name" value="SurfDestinations/Dashboard1" />
+        <param name="tabs" value="no" />
+        <param name="toolbar" value="yes" />
+        <param name="static_image" value="https://public.tableau.com/static/images/Su/SurfDestinations/Dashboard1/1.png" />
+        <param name="animate_transition" value="yes" />
+        <param name="display_static_image" value="yes" />
+        <param name="display_spinner" value="yes" />
+        <param name="display_overlay" value="yes" />
+        <param name="display_count" value="yes" />
+        <param name="language" value="en-US" />
+    </object>
+</div>
+
+<script type="text/javascript">
+    // Embed Tableau Visualization
+    var divElement = document.getElementById('viz1733956172342');
+    var vizElement = divElement.getElementsByTagName('object')[0];
+    vizElement.style.width = '100%';
+    vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
+    
+    var scriptElement = document.createElement('script');
+    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+</script> <br>
+
+<!-- Catch the Color Box Game -->
+<h4>Catch the Color Game</h4>
+<p>Click on the colorful boxes as fast as you can! You have 15 seconds!</p>
+
+<div id="game-container" style="position: relative; width: 100%; height: 300px; border: 2px solid #333; background-color: #120909; overflow: hidden;">
+    <p id="timer" style="position: absolute; top: 10px; left: 10px; margin: 0; font-size: 1.2em;">Time Left: 15</p>
+    <p id="score" style="position: absolute; top: 10px; right: 10px; margin: 0; font-size: 1.2em;">Score: 0</p>
+</div>
+<br>
+<button id="start-game" style="padding: 10px 20px; font-size: 1em; background-color: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px;">
+    Start Game
+</button>
+
+<script>
+    const gameContainer = document.getElementById("game-container");
+    const startButton = document.getElementById("start-game");
+    const timerDisplay = document.getElementById("timer");
+    const scoreDisplay = document.getElementById("score");
+
+    let timer = 15;
+    let score = 0;
+    let gameInterval, timerInterval;
+
+    // Function to create a random box
+    function createBox() {
+        const box = document.createElement("div");
+        box.style.position = "absolute";
+        box.style.width = "50px";
+        box.style.height = "50px";
+        box.style.backgroundColor = getRandomColor();
+        box.style.top = Math.random() * (gameContainer.offsetHeight - 50) + "px";
+        box.style.left = Math.random() * (gameContainer.offsetWidth - 50) + "px";
+        box.style.cursor = "pointer";
+        box.style.borderRadius = Math.random() > 0.5 ? "50%" : "0"; // Randomly circle or square
+        gameContainer.appendChild(box);
+
+        box.addEventListener("click", () => {
+            score++;
+            scoreDisplay.textContent = `Score: ${score}`;
+            box.remove();
+        });
+
+        // Remove the box if not clicked in 2 seconds
+        setTimeout(() => {
+            if (box.parentNode) box.remove();
+        }, 2000);
+    }
+
+    // Function to generate a random color
+    function getRandomColor() {
+        return `hsl(${Math.random() * 360}, 70%, 60%)`;
+    }
+
+    // Start the game
+    function startGame() {
+        // Reset timer and score
+        timer = 15;
+        score = 0;
+        timerDisplay.textContent = `Time Left: ${timer}`;
+        scoreDisplay.textContent = `Score: ${score}`;
+        gameContainer.innerHTML = ""; // Clear any existing boxes
+        startButton.disabled = true;
+
+        // Create boxes periodically
+        gameInterval = setInterval(createBox, 800);
+
+        // Start countdown timer
+        timerInterval = setInterval(() => {
+            timer--;
+            timerDisplay.textContent = `Time Left: ${timer}`;
+            if (timer <= 0) {
+                clearInterval(timerInterval);
+                clearInterval(gameInterval);
+                endGame();
+            }
+        }, 1000);
+    }
+
+    // End the game
+    function endGame() {
+        alert(`Game Over! Your final score is ${score}`);
+        startButton.disabled = false;
+    }
+
+    startButton.addEventListener("click", startGame);
+</script> <br> <br>
+back to the  <a href="#top">top</a>
+</body>
+</html>
